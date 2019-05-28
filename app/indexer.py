@@ -10,20 +10,31 @@ def retrieve_documents(filepath):
     return f.read().split('\n\n')
 
 
-def create_inverted_indexes(documents):
-    return {}
+def _create_inverted_indexes():
+    document_index = cache.get('documents')
+    word_to_document = {}
+    for index, document in document_index.items():
+        words = list(set(document.split()))
+        for word in words:
+            word_to_document[word] = word_to_document.get(word, [])
+            word_to_document[word].append(index)
+    cache.set('inverted_index', word_to_document)
+
+
+def _create_document_indexes(documents):
+    documents_index = dict()
+    for index, document in enumerate(documents):
+        documents_index[index + 1] = document
+    cache.set('documents', documents_index)
 
 
 def create_indexes_from_dataset(filepath):
-    from app.store import cache
     '''
     :param filepath:
     :return:
     '''
     documents = retrieve_documents(filepath)
-    documents_index = dict()
-    for index, document in enumerate(documents):
-        documents_index[index+1] = document
-    cache.set('documents', documents_index)
+    _create_document_indexes(documents)
+    _create_inverted_indexes()
     return documents
 

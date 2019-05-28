@@ -1,8 +1,8 @@
 from app import app
-from store import cache
+from flask import request
+from document_retriever import retrieve_documents
 
 
-@app.route('/')
-@app.route('/index')
-def index():
-    return str(len(cache.get('documents')))
+@app.route('/search')
+def search():
+    return retrieve_documents(request.args.get('search'))
