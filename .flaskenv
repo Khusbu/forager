@@ -1,1 +1,2 @@
 FLASK_APP=forager.py
+FLASK_DEBUG=1

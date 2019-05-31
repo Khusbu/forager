@@ -1,7 +1,7 @@
 from store import cache
 
 
-def retrieve_documents(filepath):
+def create_documents_from_dataset(filepath):
     '''
     :param filepath: path of the dataset
     :return: list of documents
@@ -33,7 +33,7 @@ def create_indexes_from_dataset(filepath):
     :param filepath:
     :return:
     '''
-    documents = retrieve_documents(filepath)
+    documents = create_documents_from_dataset(filepath)
     _create_document_indexes(documents)
     _create_inverted_indexes()
     return documents
