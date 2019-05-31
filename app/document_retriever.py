@@ -5,6 +5,7 @@ def retrieve_documents(query_terms):
     document_set = set()
     for query_term in query_terms:
         document_indexes = cache.get('inverted_index').get(query_term)
-        document_set = document_set.union(set(document_indexes))
+        if document_indexes:
+            document_set = document_set.union(set(document_indexes))
     return list(document_set)
 
