@@ -1,4 +1,4 @@
-from store import cache
+from .store import cache
 
 
 def create_documents_from_dataset(filepath):

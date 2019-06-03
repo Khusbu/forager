@@ -1,5 +1,5 @@
 import operator
-from store import cache
+from .store import cache
 
 K = 20
 
@@ -28,7 +28,6 @@ def score_document(query_terms, document):
 
 def get_top_k_documents(query_terms, documents):
     document_to_score = score_documents(query_terms, documents)
-    print('Document to score', document_to_score)
     sorted_document_to_score = sorted(document_to_score.items(), key=operator.itemgetter(1))[:K]
     return [cache.get('documents').get(document) for document, _ in sorted_document_to_score]
 

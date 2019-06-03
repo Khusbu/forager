@@ -1,4 +1,4 @@
-from store import cache
+from .store import cache
 
 
 def retrieve_documents(query_terms):

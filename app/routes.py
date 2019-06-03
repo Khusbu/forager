@@ -1,7 +1,7 @@
 from app import app
 from flask import request
-from document_retriever import retrieve_documents
-from scorer import get_top_k_documents
+from .document_retriever import retrieve_documents
+from .scorer import get_top_k_documents
 from flask import render_template
 
 
