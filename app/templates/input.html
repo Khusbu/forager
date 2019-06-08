@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <form action="/search" method="get">
-        Search:
-        <input type="text" name="search">
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
+{% extends "base.html" %}
+{% block app_content %}
+    <div class="row">
+        <form action="/search" method="get" class="form-row">
+            <div class="form-group">
+                <input type="text" name="search" class="form-control" placeholder="What you would like to search?">
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Let's Forage</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

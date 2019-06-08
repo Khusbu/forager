@@ -1,0 +1,14 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+    forager
+{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <div class="container center" xmlns="http://www.w3.org/1999/html">
+        {# application content needs to be provided in the app_content block #}
+{#        <img src="{{url_for('static', filename='images/forager.jpg')}}" class="img-fluid">#}
+        {% block app_content %}{% endblock %}
+    </div>
+{% endblock %}

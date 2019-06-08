@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_bootstrap import Bootstrap
 from app import indexer
 
 
@@ -12,5 +13,6 @@ def create_app():
 
 
 app = create_app()
+bootstrap = Bootstrap(app)
 
 from app import routes
