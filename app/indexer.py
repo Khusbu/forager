@@ -1,4 +1,4 @@
-from .store import cache
+from .store import store
 
 
 def create_documents_from_dataset(filepath):
@@ -11,21 +11,19 @@ def create_documents_from_dataset(filepath):
 
 
 def _create_inverted_indexes():
-    document_index = cache.get('documents')
+    document_index = store.get_documents()
     word_to_document = {}
     for index, document in document_index.items():
         words = list(set(document.split()))
         for word in words:
             word_to_document[word] = word_to_document.get(word, [])
             word_to_document[word].append(index)
-    cache.set('inverted_index', word_to_document)
+    store.add_word_to_document_ids(word_to_document)
 
 
 def _create_document_indexes(documents):
-    documents_index = dict()
-    for index, document in enumerate(documents):
-        documents_index[index + 1] = document
-    cache.set('documents', documents_index)
+    for document in documents:
+        store.add_document(document)
 
 
 def create_indexes_from_dataset(filepath):

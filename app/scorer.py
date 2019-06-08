@@ -1,5 +1,5 @@
 import operator
-from .store import cache
+from .store import store
 
 K = 20
 
@@ -19,7 +19,7 @@ def calculate_score(freq, total_query_terms):
 
 def score_document(query_terms, document):
     freq = 0
-    document_indexes = cache.get('documents')
+    document_indexes = store.get_documents()
     for query_term in query_terms:
         if query_term in document_indexes.get(document):
             freq += 1
@@ -29,7 +29,7 @@ def score_document(query_terms, document):
 def get_top_k_documents(query_terms, documents):
     document_to_score = score_documents(query_terms, documents)
     sorted_document_to_score = sorted(document_to_score.items(), key=operator.itemgetter(1))[:K]
-    return [cache.get('documents').get(document) for document, _ in sorted_document_to_score]
+    return [store.get_document_by_id(document) for document, _ in sorted_document_to_score]
 
 
 
