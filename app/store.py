@@ -1,5 +1,7 @@
 from werkzeug.contrib.cache import SimpleCache
 
+from app.review import Review
+
 
 class Store:
     class __Store:
@@ -16,22 +18,37 @@ class Store:
             '''
             self.cache = SimpleCache()
 
-        def get_reviews(self):
+        def _get_reviews(self):
             return self.cache.get('reviews') or {}
 
         def get_review_by_id(self, id):
-            return self.get_reviews().get(id)
+            return Review(**self._get_reviews().get(id))
 
-        def get_word_to_review_ids(self):
+        def _get_word_to_review_ids(self):
             return self.cache.get('word_to_review_ids') or {}
 
         def get_review_ids_by_word(self, word):
-            return self.get_word_to_review_ids().get(word)
+            return self._get_word_to_review_ids().get(word)
 
         def add_reviews(self, reviews):
+            '''
+            :param reviews: {
+                <review_id>: Review object,
+                ...
+            }
+            :return:
+            '''
+            reviews = {review_id: review.to_dict() for review_id, review in reviews.items()}
             self.cache.set('reviews', reviews)
 
         def add_word_to_review_ids(self, word_to_review_ids):
+            '''
+            :param word_to_review_ids: {
+                <word>: <list_of_review_ids>.
+                ...
+            }
+            :return:
+            '''
             self.cache.set('word_to_review_ids', word_to_review_ids)
 
     instance = None
