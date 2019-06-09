@@ -1,4 +1,6 @@
-K = 20
+import os
+
+K = int(os.environ.get('K', 20))
 
 
 def score_reviews(query_terms, reviews):
