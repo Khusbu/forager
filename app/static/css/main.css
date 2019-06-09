@@ -14,6 +14,6 @@ img {
 }
 
 mark {
-    font-weight: bold;
-    background: yellow;
+    font-weight: bold !important;
+    background-color: yellow !important;
 }
