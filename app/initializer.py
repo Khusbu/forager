@@ -1,17 +1,35 @@
 from app import indexer
 from app.review import Review
 
+TEXT_PRODUCT_ID = 'product/productId: '
+TEXT_USER_ID = 'review/userId: '
+TEXT_PROFILE_NAME = 'review/profileName: '
+TEXT_HELPFULNESS = 'review/helpfulness: '
+TEXT_SCORE = 'review/score: '
+TEXT_TIME = 'review/time: '
+TEXT_SUMMARY = 'review/summary: '
+TEXT_TEXT = 'review/text: '
+
 
 def _create_review_from_document(document):
     lines = document.split('\n')
-    product_id = lines[0].split('product/productId: ')[1]
-    user_id = lines[1].split('review/userId: ')[1]
-    profile_name = lines[2].split('review/profileName: ')[1]
-    helpfulness = lines[3].split('review/helpfulness: ')[1]
-    score = lines[4].split('review/score: ')[1]
-    time = lines[5].split('review/time: ')[1]
-    summary = lines[6].split('review/summary: ')[1]
-    text = lines[7].split('review/text: ')[1]
+    for line in lines:
+        if line.startswith(TEXT_PRODUCT_ID):
+            product_id = line.split(TEXT_PRODUCT_ID)[1]
+        if line.startswith(TEXT_USER_ID):
+            user_id = line.split(TEXT_USER_ID)[1]
+        if line.startswith(TEXT_PROFILE_NAME):
+            profile_name = line.split(TEXT_PROFILE_NAME)[1]
+        if line.startswith(TEXT_HELPFULNESS):
+            helpfulness = line.split(TEXT_HELPFULNESS)[1]
+        if line.startswith(TEXT_SCORE):
+            score = line.split(TEXT_SCORE)[1]
+        if line.startswith(TEXT_TIME):
+            time = line.split(TEXT_TIME)[1]
+        if line.startswith(TEXT_SUMMARY):
+            summary = line.split(TEXT_SUMMARY)[1]
+        if line.startswith(TEXT_TEXT):
+            text = line.split(TEXT_TEXT)[1]
 
     return Review(product_id, user_id, profile_name, helpfulness,
                   score, time, summary, text)
