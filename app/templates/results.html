@@ -1,10 +1,10 @@
 {% extends "input.html" %}
 
 {% block results %}
-    <div class="row">
-        <h1> Search Results: </h1>
-    </div>
     {% if reviews %}
+        <div class="row">
+            <h3>Showing {{ reviews|count }} reviews:</h3>
+        </div>
         <div id="results" style="text-align: left;">
             {% for review in reviews %}
                 <div class="row">
@@ -21,7 +21,7 @@
             {% endfor %}
         </div>
     {% else %}
-        "Uh oh! nothing found
+        "Uh oh! nothing found"
     {% endif %}
 
     <script>
