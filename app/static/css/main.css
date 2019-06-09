@@ -3,12 +3,17 @@
 }
 
 img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
 }
 
 .center {
     text-align: center;
+}
+
+mark {
+    font-weight: bold;
+    background: yellow;
 }

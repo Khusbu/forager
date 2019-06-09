@@ -8,7 +8,7 @@ from flask import render_template
 def search():
     query_terms = request.args.get('search').split()
     top_k_reviews = retrieve_top_k_reviews(query_terms)
-    return render_template('results.html', reviews=top_k_reviews)
+    return render_template('results.html', reviews=top_k_reviews, query_terms=query_terms)
 
 
 @app.route('/')

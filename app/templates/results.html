@@ -1,17 +1,26 @@
 {% extends "input.html" %}
 
 {% block results %}
+    <script src="//code.jquery.com/jquery-3.1.0.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.es6.js"></script>
+
     <div class="row">
         <h1> Search Results: </h1>
     </div>
     {% if reviews %}
-        {% for review in reviews %}
-            <div class="row">
-                {{ review.text }}
-            </div>
-            </br>
-        {% endfor %}
+        <div id="results">
+            {% for review in reviews %}
+                <div class="row">
+                    {{ review.text }}
+                </div>
+                </br>
+            {% endfor %}
+        </div>
     {% else %}
         "Uh oh! nothing found
     {% endif %}
+
+    <script>
+        $('#results').mark({{ query_terms | safe}});
+    </script>
 {% endblock %}
