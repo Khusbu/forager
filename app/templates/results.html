@@ -4,11 +4,12 @@
     <div class="row">
         <h1> Search Results: </h1>
     </div>
-    {% if documents %}
-        {% for document in documents %}
+    {% if reviews %}
+        {% for review in reviews %}
             <div class="row">
-                {{ document.text }}
+                {{ review.text }}
             </div>
+            </br>
         {% endfor %}
     {% else %}
         "Uh oh! nothing found

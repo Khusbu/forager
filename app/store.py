@@ -6,40 +6,33 @@ class Store:
         def __init__(self):
             '''
             Cache structure
-            { 'documents': {
-                  <id>: <document>
+            { 'reviews': {
+                  <id>: <review>
               },
-              'word_to_document_ids': {
-                  <word>: <list_of_document_ids>
+              'word_to_review_ids': {
+                  <word>: <list_of_review_ids>
               }
             }
             '''
             self.cache = SimpleCache()
 
-        def get_documents(self):
-            return self.cache.get('documents') or {}
+        def get_reviews(self):
+            return self.cache.get('reviews') or {}
 
-        def get_document_by_id(self, id):
-            return self.get_documents().get(id)
+        def get_review_by_id(self, id):
+            return self.get_reviews().get(id)
 
-        def get_word_to_document_ids(self):
-            return self.cache.get('word_to_document_ids') or {}
+        def get_word_to_review_ids(self):
+            return self.cache.get('word_to_review_ids') or {}
 
-        def get_document_ids_by_word(self, word):
-            return self.get_word_to_document_ids().get(word)
+        def get_review_ids_by_word(self, word):
+            return self.get_word_to_review_ids().get(word)
 
-        def add_document(self, document):
-            documents = self.get_documents()
-            total_documents = len(documents)
-            documents.update({
-                total_documents + 1: document
-            })
-            self.cache.set('documents', documents)
+        def add_reviews(self, reviews):
+            self.cache.set('reviews', reviews)
 
-        def add_word_to_document_ids(self, data):
-            word_to_document_ids = self.get_word_to_document_ids()
-            word_to_document_ids.update(data)
-            self.cache.set('word_to_document_ids', word_to_document_ids)
+        def add_word_to_review_ids(self, word_to_review_ids):
+            self.cache.set('word_to_review_ids', word_to_review_ids)
 
     instance = None
 

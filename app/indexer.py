@@ -1,38 +1,47 @@
 from .store import store
 
 
-def create_documents_from_dataset(filepath):
+def create_inverted_index_for_reviews(review_indexes):
     '''
-    :param filepath: path of the dataset
-    :return: list of documents
+    :param review_indexes: dict of id_to_review
+    :return: {
+        <word>: <list_of_review_ids>,
+        ...
+    }
     '''
-    f = open(filepath, 'r')
-    return f.read().split('\n\n')
-
-
-def _create_inverted_indexes():
-    document_index = store.get_documents()
-    word_to_document = {}
-    for index, document in document_index.items():
-        words = list(set(document.split()))
+    review_inverted_indexes = {}
+    for index, review in review_indexes.items():
+        words = list(set(review.text.split()))
         for word in words:
-            word_to_document[word] = word_to_document.get(word, [])
-            word_to_document[word].append(index)
-    store.add_word_to_document_ids(word_to_document)
+            review_inverted_indexes[word] = review_inverted_indexes.get(word, [])
+            review_inverted_indexes[word].append(index)
+    return review_inverted_indexes
 
 
-def _create_document_indexes(documents):
-    for document in documents:
-        store.add_document(document)
-
-
-def create_indexes_from_dataset(filepath):
+def create_index_for_reviews(reviews):
     '''
-    :param filepath:
-    :return:
+    :param reviews: Review objects
+    :return: {
+        <id>: <review_dict>,
+        ...
+    }
     '''
-    documents = create_documents_from_dataset(filepath)
-    _create_document_indexes(documents)
-    _create_inverted_indexes()
-    return documents
+    review_indexes = {}
+    for index, review in enumerate(reviews):
+        if reviews:
+            review_indexes.update({index+1: review})
+    return review_indexes
+
+
+def create_indexes(reviews):
+    '''
+    :param reviews: list of Review objects
+    :return: None
+
+    Create index and inverted index for reviews and store it in cache.
+    '''
+    review_indexes = create_index_for_reviews(reviews)
+    store.add_reviews(review_indexes)
+    review_inverted_indexes = create_inverted_index_for_reviews(review_indexes)
+    store.add_word_to_review_ids(review_inverted_indexes)
 
