@@ -8,10 +8,17 @@
         <h1> Search Results: </h1>
     </div>
     {% if reviews %}
-        <div id="results">
+        <div id="results" style="text-align: left;">
             {% for review in reviews %}
                 <div class="row">
-                    {{ review.text }}
+                    <b>Product ID: </b>{{ review.product_id }}<br>
+                    <b>User ID: </b>{{ review.user_id }}<br>
+                    <b>Profile Name: </b>{{ review.profile_name }}<br>
+                    <b>Helpfulness: </b>{{ review.helpfulness }}<br>
+                    <b>Score: </b>{{ review.score }}<br>
+                    <b>Time: </b>{{ review.time }}<br>
+                    <b>Summary: </b>{{ review.summary }}<br>
+                    <b>Text: </b>{{ review.text }}<br>
                 </div>
                 </br>
             {% endfor %}
