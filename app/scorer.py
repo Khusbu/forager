@@ -1,6 +1,3 @@
-import operator
-from .store import store
-
 K = 20
 
 
@@ -27,7 +24,8 @@ def score_review(query_terms, review):
 
 def get_top_k_reviews(query_terms, reviews):
     review_to_score = score_reviews(query_terms, reviews)
-    sorted_review_to_score = sorted(review_to_score.items(), key=operator.itemgetter(1))[:K]
+    # sort by document score and then by review/score
+    sorted_review_to_score = sorted(review_to_score.items(), key=lambda x: (-x[1], -float(x[0].score)))[:K]
     return [review for review, _ in sorted_review_to_score]
 
 
