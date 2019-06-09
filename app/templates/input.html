@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% block app_content %}
     <div class="row">
         <form action="/search" method="get" class="form-row">
@@ -10,4 +11,5 @@
             </div>
         </form>
     </div>
+    {% block results %}{% endblock %}
 {% endblock %}
