@@ -46,12 +46,12 @@ flask run
 Open the url in your browser:  
 `http://127.0.0.1:5000`
 
-![Screenshot](docs/images/home_page.png)
+> ![Screenshot](docs/images/home_page.png)
 
 Enter a search term. For example: `tea`  
 It will return all the documents having term `tea`
 
-![Screenshot](docs/images/search_results.png)
+> ![Screenshot](docs/images/search_results.png)
 
 ### next-milestone
 - case insensitive comparison
